@@ -79,6 +79,20 @@ extension Services {
         s.register(Console.self) { c in
             return Terminal()
         }
+        // logging
+        s.register(Logger.self) { c in
+            return try c.make(Application.self).logger
+        }
+        s.register(ConsoleLogger.self) { c in
+            return try ConsoleLogger(
+                console: c.make(),
+                level: c.environment == .production ? .error : .info,
+                metadata: [:]
+            )
+        }
+        s.register(LogHandler.self) { c in
+            return try c.make(ConsoleLogger.self)
+        }
         
         // server
         s.register(HTTPServer.Configuration.self) { c in
@@ -125,13 +139,6 @@ extension Services {
             return .detect()
         }
 
-        // logging
-        s.register(ConsoleLogger.self) { container in
-            return try ConsoleLogger(console: container.make())
-        }
-        s.register(Logger.self) { c in
-            return try c.make(Application.self).logger
-        }
 
         // view
         s.register(ViewRenderer.self) { c in
