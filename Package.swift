@@ -23,9 +23,6 @@ let package = Package(
         // Parses and serializes multipart-encoded data with Codable support.
         .package(url: "https://github.com/vapor/multipart-kit.git", from: "4.0.0-beta.2"),
 
-        // 🔑 Hashing (BCrypt, SHA2, HMAC), encryption (AES), public-key (RSA), and random data generation.
-        .package(url: "https://github.com/vapor/open-crypto.git", from: "4.0.0-beta.2"),
-
         // 🚍 High-performance trie-node router.
         .package(url: "https://github.com/vapor/routing-kit.git", from: "4.0.0-beta.3"),
         
@@ -75,7 +72,6 @@ let package = Package(
             "NIOHTTP2",
             "NIOSSL",
             "NIOWebSocket",
-            "OpenCrypto",
             "RoutingKit",
             "WebSocketKit",
         ]),
